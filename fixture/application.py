@@ -26,11 +26,6 @@ class Application:
     def destroy(self):
         self.wd.quit()
 
-    def logout(self):
-        wd = self.wd
-        # loguot
-        wd.find_element_by_link_text("Logout").click()
-
     def return_to_home_page(self):
         wd = self.wd
         # Go to home page ?
@@ -73,23 +68,3 @@ class Application:
         wd = self.wd
         # Open add new page
         wd.find_element_by_link_text("add new").click()
-        # wd.get("http://localhost/addressbook/edit.php")
-
-    def login(self, username, password):
-        wd = self.wd
-        # login
-        self.open_home_page()
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//input[@value='Login']").click()
-
-    def open_home_page(self):
-        wd = self.wd
-        # Open home page
-        wd.get("http://localhost/addressbook/")
-        # wd.get("http://localhost/addressbook/index.php")
-
