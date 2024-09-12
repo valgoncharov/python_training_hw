@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
+from user import User
 
 
 class UntitledTestCase(unittest.TestCase):
@@ -15,7 +16,7 @@ class UntitledTestCase(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_add_new_page(wd)
-        self.fill_new_user(wd, firstname="iewrfnse", middlename="fsf", lastname="Poigl", address="str. Uhhfjfd", homephone="+5-585-6894", mobilephone="(99)-43-656", workphone="32425346")
+        self.fill_new_user(wd, User(firstname="iewrfnse", middlename="fsf", lastname="Poigl", address="str. Uhhfjfd", homephone="+5-585-6894", mobilephone="(99)-43-656", workphone="32425346"))
         self.submit_new_user(wd)
         self.go_to_home_page(wd)
         self.logout(wd)
@@ -25,7 +26,7 @@ class UntitledTestCase(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_add_new_page(wd)
-        self.fill_new_user(wd, firstname="", middlename="", lastname="", address="", homephone="", mobilephone="", workphone="")
+        self.fill_new_user(wd, User(firstname="", middlename="", lastname="", address="", homephone="", mobilephone="", workphone=""))
         self.submit_new_user(wd)
         self.go_to_home_page(wd)
         self.logout(wd)
@@ -42,29 +43,29 @@ class UntitledTestCase(unittest.TestCase):
         # submit new user
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
 
-    def fill_new_user(self, wd, firstname, middlename, lastname, address, homephone, mobilephone, workphone):
+    def fill_new_user(self, wd, user):
         # fill new user
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(firstname)
+        wd.find_element_by_name("firstname").send_keys(user.firstname)
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(middlename)
+        wd.find_element_by_name("middlename").send_keys(user.middlename)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(lastname)
+        wd.find_element_by_name("lastname").send_keys(user.lastname)
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(address)
+        wd.find_element_by_name("address").send_keys(user.address)
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(homephone)
+        wd.find_element_by_name("home").send_keys(user.homephone)
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(mobilephone)
+        wd.find_element_by_name("mobile").send_keys(user.mobilephone)
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(workphone)
+        wd.find_element_by_name("work").send_keys(user.workphone)
 
     def open_add_new_page(self, wd):
         # Open add new page
