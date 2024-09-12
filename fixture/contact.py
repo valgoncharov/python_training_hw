@@ -76,13 +76,13 @@ class ContactHelper:
         # Go to home page ?
         wd.find_element_by_link_text("home page").click()
 
-    def submit_new_user(self):
+    def submit_new_contact(self):
         wd = self.app.wd
         # submit new user
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
         self.return_to_home_page()
 
-    def fill_new_user(self, user):
+    def add_new_contact(self, user):
         wd = self.app.wd
         self.open_add_new_page()
         # fill new user
@@ -107,7 +107,7 @@ class ContactHelper:
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
         wd.find_element_by_name("work").send_keys(user.workphone)
-        self.submit_new_user()
+        self.submit_new_contact()
 
     def open_add_new_page(self):
         wd = self.app.wd
