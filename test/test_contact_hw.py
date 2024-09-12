@@ -13,37 +13,31 @@ class UntitledTestCase(unittest.TestCase):
 
     def test_add_new_user(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_add_new_page(wd)
         self.fill_new_user(wd, User(firstname="iewrfnse", middlename="fsf", lastname="Poigl", address="str. Uhhfjfd", homephone="+5-585-6894", mobilephone="(99)-43-656", workphone="32425346"))
-        self.submit_new_user(wd)
-        self.go_to_home_page(wd)
         self.logout(wd)
 
     def test_add_empty_user(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_add_new_page(wd)
         self.fill_new_user(wd, User(firstname="", middlename="", lastname="", address="", homephone="", mobilephone="", workphone=""))
-        self.submit_new_user(wd)
-        self.go_to_home_page(wd)
         self.logout(wd)
 
     def logout(self, wd):
         # loguot
         wd.find_element_by_link_text("Logout").click()
 
-    def go_to_home_page(self, wd):
+    def return_to_home_page(self, wd):
         # Go to home page ?
         wd.find_element_by_link_text("home page").click()
 
     def submit_new_user(self, wd):
         # submit new user
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
+        self.return_to_home_page(wd)
 
     def fill_new_user(self, wd, user):
+        self.open_add_new_page(wd)
         # fill new user
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -66,6 +60,7 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
         wd.find_element_by_name("work").send_keys(user.workphone)
+        self.submit_new_user(wd)
 
     def open_add_new_page(self, wd):
         # Open add new page
@@ -74,6 +69,7 @@ class UntitledTestCase(unittest.TestCase):
 
     def login(self, wd, username, password):
         # login
+        self.open_home_page(wd)
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
