@@ -13,11 +13,11 @@ def app(request):
 
 def test_add_new_user(app):
     app.session.login(username="admin", password="secret")
-    app.fill_new_user(Contact(firstname="Finse", middlename="Brad", lastname="Loki", address="str. Xikol", homephone="+5-585-6894", mobilephone="+1-(753)-43-656", workphone="32425346"))
+    app.contact.fill_new_user(Contact(firstname="Finse", middlename="Brad", lastname="Loki", address="str. Xikol", homephone="+5-585-6894", mobilephone="+1-(753)-43-656", workphone="32425346"))
     app.session.logout()
 
 
 def test_add_empty_user(app):
     app.session.login(username="admin", password="secret")
-    app.fill_new_user(Contact(firstname="", middlename="", lastname="", address="", homephone="", mobilephone="", workphone=""))
+    app.contact.fill_new_user(Contact(firstname="", middlename="", lastname="", address="", homephone="", mobilephone="", workphone=""))
     app.session.logout()
